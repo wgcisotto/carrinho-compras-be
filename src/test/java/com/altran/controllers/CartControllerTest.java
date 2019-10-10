@@ -77,7 +77,7 @@ public class CartControllerTest {
 
     @Test
     public void addItem_thenReturnOk() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/carts/user/5d9eb050b1746f1d188c8e55")
+        mockMvc.perform(MockMvcRequestBuilders.put("/carts/user/5d9eb050b1746f1d188c8e55")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsBytes(item))
                 .accept(MediaType.APPLICATION_JSON))

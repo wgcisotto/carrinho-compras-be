@@ -2,14 +2,17 @@ package com.altran.controllers;
 
 import com.altran.models.Item;
 import com.altran.models.User;
+import com.altran.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,6 +26,9 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private UserRepository userRepository;
 
     private static User user;
 
@@ -60,16 +66,5 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
-
-    @Test
-    @Ignore
-    public void update_thenReturnOK() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/users/5d9eb050b1746f1d188c8e55")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsBytes(user))
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
 
 }

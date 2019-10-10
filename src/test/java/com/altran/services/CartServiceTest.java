@@ -10,14 +10,9 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -43,6 +38,7 @@ public class CartServiceTest {
     private User user;
     private Item item;
     private Cart cart;
+    private CartItem cartItem;
 
     @Before
     public void init(){
@@ -56,19 +52,25 @@ public class CartServiceTest {
                 .id(ID)
                 .price(10L)
                 .build();
+
+
+        cartItem = CartItem.builder()
+                .qtd(10)
+                .item(item)
+                .build();
+
+        cart = Cart.builder()
+                .user(user)
+                .items(Arrays.asList(cartItem))
+                .build();
     }
 
     @Test
     public void addItem() throws Exception {
 
-        CartItem cartItem = CartItem.builder()
-                .qtd(1)
-                .item(item)
-                .build();
-
         when(cartRepository.findByUser(user)).thenReturn(Optional.ofNullable(cart));
-
         when(userService.findById(ID)).thenReturn(Optional.ofNullable(user));
+        when(cartRepository.save(cart)).thenReturn(cart);
 
         Cart cartAdd = cartService.addItem(ID,item);
 
@@ -76,9 +78,38 @@ public class CartServiceTest {
     }
 
     @Test
-    public void createCart(){
-        cartService.createCart(user, item);
+    public void removeItem() throws Exception {
+        when(userService.findById(ID)).thenReturn(Optional.ofNullable(user));
+        when(cartRepository.findByUser(user)).thenReturn(Optional.ofNullable(cart));
+        when(cartRepository.save(cart)).thenReturn(cart);
+
+        Cart cartRemoved = cartService.removeItem(ID,item);
+
+        Assert.assertEquals(cart,cartRemoved);
+
+
     }
 
+    @Test
+    public void findByUserId() throws  Exception {
+        when(userService.findById(ID)).thenReturn(Optional.ofNullable(user));
+        when(cartRepository.findByUser(user)).thenReturn(Optional.ofNullable(cart));
+
+        Cart cartFound = cartService.findByUserId(ID);
+        Assert.assertEquals(cart,cartFound);
+    }
+
+    @Test
+    public void delete()  {
+        when(cartRepository.findById(ID)).thenReturn(Optional.ofNullable(cart));
+        cartService.delete(ID);
+    }
+
+    public void create() throws Exception{
+        when(cartRepository.save(cart)).thenReturn(cart);
+        Cart cartSaved = cartService.createCart(user,item);
+
+        Assert.assertEquals(cart,cartSaved);
+    }
 
 }

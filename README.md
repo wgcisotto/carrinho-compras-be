@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/wgcisotto/word-server.svg?branch=master)](https://travis-ci.com/wgcisotto/word-server)
+[![Build Status](https://travis-ci.com/wgcisotto/carrinho-compras-be.svg?branch=master)](https://travis-ci.com/wgcisotto/carrinho-compras-be)
 [![codecov](https://codecov.io/gh/wgcisotto/word-server/branch/master/graph/badge.svg)](https://codecov.io/gh/wgcisotto/word-server)
 
 ## BackEnd  
@@ -37,9 +37,19 @@ DELETE| /carts/{id}	| delete a cart
 
 ## Starting application
 
+**Pre**
+
+``install mongo``
+``port: 27017``
+``dbname: mongo-db``
+
 **Build**
 
 ``./mvnw clean install dockerfile:build`` 
+
+**Start Jar**
+
+``java -jar /target/carrinho-compras-be-0.0.1-SNAPSHOT.jar``
 
 **Run Docker**
 

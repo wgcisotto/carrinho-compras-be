@@ -2,6 +2,7 @@ package com.altran.controllers;
 
 import com.altran.models.Item;
 import com.altran.repositories.ItemRepository;
+import com.altran.services.ItemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -29,6 +30,9 @@ public class ItemControllerTest {
     @MockBean
     private ItemRepository itemRepository;
 
+    @MockBean
+    private ItemService itemService;
+
     private static Item item;
 
     @BeforeClass
@@ -49,7 +53,17 @@ public class ItemControllerTest {
 
     @Test
     public void save_thenReturnOK() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/items")
+        mockMvc.perform(MockMvcRequestBuilders.post("/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsBytes(item))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+
+    @Test
+    public void update_thenReturnOK() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("/items/5d9eb050b1746f1d188c8e55")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsBytes(item))
                 .accept(MediaType.APPLICATION_JSON))

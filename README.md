@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/wgcisotto/carrinho-compras-be.svg?branch=master)](https://travis-ci.com/wgcisotto/carrinho-compras-be)
-[![codecov](https://codecov.io/gh/wgcisotto/word-server/branch/master/graph/badge.svg)](https://codecov.io/gh/wgcisotto/word-server)
+[![codecov](https://codecov.io/gh/wgcisotto/carrinho-compras-be/branch/master/graph/badge.svg)](https://codecov.io/gh/wgcisotto/carrinho-compras-be)
 
 ## BackEnd  
 

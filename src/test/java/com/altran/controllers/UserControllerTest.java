@@ -3,6 +3,7 @@ package com.altran.controllers;
 import com.altran.models.Item;
 import com.altran.models.User;
 import com.altran.repositories.UserRepository;
+import com.altran.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -30,6 +31,9 @@ public class UserControllerTest {
     @MockBean
     private UserRepository userRepository;
 
+    @MockBean
+    private UserService userService;
+
     private static User user;
 
     @BeforeClass
@@ -50,7 +54,17 @@ public class UserControllerTest {
 
     @Test
     public void save_thenReturnOK() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users")
+        mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsBytes(user))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+
+    @Test
+    public void update_thenReturnOK() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/5d9eb050b1746f1d188c8e55")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsBytes(user))
                 .accept(MediaType.APPLICATION_JSON))

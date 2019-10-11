@@ -84,6 +84,15 @@ public class CartControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    public void findByUserId_thenReturnOk() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/carts/user/5d9eb050b1746f1d188c8e55")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+
 
     @Test
     public void removeItem_thenReturnOk() throws Exception {

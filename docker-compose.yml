@@ -1,0 +1,42 @@
+version: '2.3'
+
+
+services:
+
+  backend:
+    image: wgcisotto/carrinho-compras-be
+    ports:
+      - 8080:8080
+    mem_limit: 512m
+    mem_reservation: 256m
+    cpus: 1
+    networks:
+      - project-network
+
+  frontend:
+    image: wgcisotto/carrinho-compras-fe
+    ports:
+      - 8080:8080
+    mem_limit: 512m
+    mem_reservation: 256m
+    cpus: 1
+    networks:
+      - project-network
+  
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    mem_limit: 512m
+    mem_reservation: 256m
+    cpus: 1
+    networks:
+      - project-network
+  
+networks:
+  project-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.18.0.1/24

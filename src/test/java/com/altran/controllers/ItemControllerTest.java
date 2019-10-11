@@ -81,4 +81,13 @@ public class ItemControllerTest {
     }
 
 
+    @Test
+    public void delete() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/items/5d9eb050b1746f1d188c8e55")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+    }
+
+
 }

@@ -81,4 +81,12 @@ public class UserControllerTest {
 
     }
 
+    @Test
+    public void delete() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/users/5d9eb050b1746f1d188c8e55")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+    }
+
 }

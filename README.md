@@ -35,12 +35,6 @@ GET| /carts/user/{id}	| get cart by user id
 PUT| /carts/{id}	| remove an item to the cart 
 DELETE| /carts/{id}	| delete a cart
 
-## Starting application with Docker Compose
-
-``docker-compose up`` 
-
-ps: imagens estao disponivel no dockerhub
-
 ## Starting application local
 
 **Getting Started**
@@ -91,4 +85,10 @@ Execute o seguinte código dentro na raiz do projeto:
 **Testing**
 
 ``curl https://localhost:8080/``
+
+## Starting application with Docker Compose
+
+``docker-compose up`` 
+
+ps: imagens estao disponivel no dockerhub
  

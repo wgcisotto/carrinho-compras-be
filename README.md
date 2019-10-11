@@ -85,10 +85,4 @@ Execute o seguinte código dentro na raiz do projeto:
 **Testing**
 
 ``curl https://localhost:8080/``
-
-## Starting application with Docker Compose
-
-``docker-compose up`` 
-
-ps: imagens estao disponivel no dockerhub
  

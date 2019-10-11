@@ -1,5 +1,6 @@
 package com.altran.controllers;
 
+import com.altran.exceptions.ValidationException;
 import com.altran.models.User;
 import com.altran.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class UserController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/users/{id}")
-    public String delete(@PathVariable String id) {
+    public String delete(@PathVariable String id) throws ValidationException {
         userService.delete(id);
         return "";
     }

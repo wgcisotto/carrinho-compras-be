@@ -90,24 +90,28 @@ public class CartService {
         }
     }
 
-    public void delete(String id){
+    public void delete(String id) throws ValidationException {
         Optional<Cart> optionalCart = cartRepository.findById(id);
+
+        if(!optionalCart.isPresent())
+            throw new ValidationException("002","Cart not found");
+
         Cart cart = optionalCart.get();
         cartRepository.delete(cart);
     }
 
-    public Cart removeItem(String userId, Item item) throws Exception {
+    public Cart removeItem(String userId, Item item) throws ValidationException {
         Optional<User> optionalUser = userService.findById(userId);
 
         if(!optionalUser.isPresent())
-            throw new Exception("User not found");
+            throw new ValidationException("001","User not found");
 
         User user = optionalUser.get();
 
         Optional<Cart> optionalCart = cartRepository.findByUser(user);
 
         if(!optionalCart.isPresent())
-            throw new Exception("Cart not found");
+            throw new ValidationException("002","Cart not found");
 
         Cart cart = optionalCart.get();
 
@@ -121,7 +125,8 @@ public class CartService {
     }
 
     private void validateQtd(Cart cart) {
-        Optional<CartItem> cartItem = cart.getItems().stream().filter(i->i.getQtd()==0).findFirst();
+        Optional<CartItem> cartItem = cart.getItems().stream()
+                .filter(i->i.getQtd()==0).findFirst();
         if(cartItem.isPresent())
             cart.getItems().remove(cartItem.get());
     }

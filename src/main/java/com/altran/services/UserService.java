@@ -1,5 +1,6 @@
 package com.altran.services;
 
+import com.altran.exceptions.ValidationException;
 import com.altran.models.User;
 import com.altran.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,12 @@ public class UserService {
 
     }
 
-    public void delete(String id){
+    public void delete(String id) throws ValidationException {
         Optional<User> optionalUser = userRepository.findById(id);
+
+        if(!optionalUser.isPresent())
+            throw new ValidationException("001","User not found");
+
         User user = optionalUser.get();
         userRepository.delete(user);
     }

@@ -1,5 +1,6 @@
 package com.altran.services;
 
+import com.altran.exceptions.ValidationException;
 import com.altran.models.Cart;
 import com.altran.models.CartItem;
 import com.altran.models.Item;
@@ -100,7 +101,7 @@ public class CartServiceTest {
     }
 
     @Test
-    public void delete()  {
+    public void delete() throws ValidationException {
         when(cartRepository.findById(ID)).thenReturn(Optional.ofNullable(cart));
         cartService.delete(ID);
     }

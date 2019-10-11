@@ -45,8 +45,12 @@ public class ItemService {
 
     }
 
-    public void delete(String id){
+    public void delete(String id) throws ValidationException {
         Optional<Item> optionalItem = itemRepository.findById(id);
+
+        if(!optionalItem.isPresent())
+            throw new ValidationException("003","Item not found");
+
         Item item = optionalItem.get();
         itemRepository.delete(item);
     }

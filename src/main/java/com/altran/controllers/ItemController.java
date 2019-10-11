@@ -1,7 +1,7 @@
 package com.altran.controllers;
 
+import com.altran.exceptions.ValidationException;
 import com.altran.models.Item;
-import com.altran.repositories.ItemRepository;
 import com.altran.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class ItemController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class ItemController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/items/{id}")
-    public String delete(@PathVariable String id) {
+    public String delete(@PathVariable String id) throws ValidationException {
         itemService.delete(id);
 
         return "";

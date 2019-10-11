@@ -7,6 +7,8 @@ services:
     image: wgcisotto/carrinho-compras-be
     ports:
       - 8080:8080
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
     mem_limit: 512m
     mem_reservation: 256m
     cpus: 1

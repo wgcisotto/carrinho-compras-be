@@ -1,5 +1,6 @@
 package com.altran.controllers;
 
+import com.altran.exceptions.ValidationException;
 import com.altran.models.Cart;
 import com.altran.models.Item;
 import com.altran.services.CartService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin
 public class CartController {
 
     @Autowired
@@ -37,7 +39,7 @@ public class CartController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/carts/{id}")
-    public String delete(@PathVariable String id) {
+    public String delete(@PathVariable String id) throws ValidationException {
         cartService.delete(id);
         return "";
     }

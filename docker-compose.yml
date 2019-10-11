@@ -16,7 +16,7 @@ services:
   frontend:
     image: wgcisotto/carrinho-compras-fe
     ports:
-      - 8080:8080
+      - 4200:80
     mem_limit: 512m
     mem_reservation: 256m
     cpus: 1

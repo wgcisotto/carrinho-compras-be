@@ -35,7 +35,21 @@ GET| /carts/user/{id}	| get cart by user id
 PUT| /carts/{id}	| remove an item to the cart 
 DELETE| /carts/{id}	| delete a cart
 
-## Starting application
+## Starting application with Docker Compose
+
+``docker-compose up`` 
+
+ps: imagens estao disponivel no dockerhub
+
+## Starting application local
+
+**Getting Started**
+
+Antes de tudo, clone o projeto:
+
+```
+# git clone https://github.com/wgcisotto/carrinho-compras-be.git
+```
 
 **Pre**
 
@@ -43,9 +57,28 @@ DELETE| /carts/{id}	| delete a cart
 ``port: 27017``
 ``dbname: mongo-db``
 
-**Build**
+``Java 8``
 
-``./mvnw clean install dockerfile:build`` 
+**config file - development environment**
+
+   *  carrinho-compras-be/src/main/resources 
+
+**Building**
+
+Para construção realize os seguintes passos:
+
+Execute o seguinte código dentro na raiz do projeto:
+
+* Linux:
+    
+    ```
+    $ ./mvnw clean install dockerfile:build
+    ```
+* Windows:
+
+    ```
+     mvnw.cmd clean install dockerfile:build
+    ```
 
 **Start Jar**
 
